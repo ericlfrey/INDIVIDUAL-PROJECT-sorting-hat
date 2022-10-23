@@ -56,9 +56,9 @@ const renderToDom = (divId, html) => {
 
 // Card on Welcome Screen
 const welcomeCard = () => {
-  let domString = `<div class="card" style="width: 18rem;">
+  let domString = `<div class="welcome-card">
   <img src="https://www.pngkey.com/png/full/106-1067907_sorting-hat-png-harry-potter-sorting-hat-png.png" class="card-img-top" alt="Hogwarts Sorting Hat">
-  <div class="card-body">
+  <div class="welcome-card-body">
     <h5 class="card-title">Welcome to Hogwarts!</h5>
     <p class="card-text">Before classes begin, all young Witches and Wizards must be sorted into a House!</p>
     <a href="#"  id='welcomeBtn' class="btn btn-dark">Get Started</a>
@@ -94,21 +94,22 @@ const cardsOnDom = (array, div) => {
   let domString = '';
   for (obj of array) {
     if (obj.type === 'student') {
-      domString += `<div class="card" style="width: 18rem;">
-    <img class="card-img-top ${obj.house}" src="./Media/${obj.house}.png" alt="${obj.house} Crest">
+      domString += `<div class="card"><div class="img-container ${obj.house}">
+    <img class="card-img-top ${obj.house}" src="./Media/${obj.house}.png" alt="${obj.house} Crest"></div>
     <div class="card-body ${obj.house}-card">
       <h5 class="card-title">${obj.name}</h5>
-      <p class="card-text">${obj.house}</p>
-      <a href="#" class="btn ${obj.house} ${obj.house}-btn" id="expel--${obj.id}">Expelliarmus!</a>
+      <h6 class="">${obj.house}</h6>
+      <a href="#" class="btn btn-sm ${obj.house} ${obj.house}-btn card-btn" id="expel--${obj.id}">Expelliarmus!</a>
     </div>
   </div>`
+      array.sort((a, b) => a.house.localeCompare(b.house));
     } else if (obj.type === 'expelled') {
-      domString += `<div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="" alt="Card image cap">
-    <div class="card-body">
-      <h5 class="card-title">${obj.name}</h5>
+      domString += `<div class="card"><div class="img-container expelled-img">
+    <img class="card-img-top" src="./Media/death-eater.png" alt="Death Eater Image"></div>
+    <div class="card-body expelled-card-body">
+      <h6 class="card-title">${obj.name}</h6>
       <p class="card-text">${obj.reason}</p>
-      <a href="#" class="btn btn-dark" id="become--${obj.id}">Expelliarmus!</a>
+      <a href="#" class="btn btn-sm btn-dark card-btn" id="become--${obj.id}">Avada Kedavra!</a>
     </div>
   </div>`
     }
@@ -175,6 +176,7 @@ welcome.addEventListener('click', e => {
 });
 // Moves cards from Students to Expelled, and removes cards from Expelled.
 cards.addEventListener('click', e => {
+  e.preventDefault();
   if (e.target.id.includes('expel')) {
     [, taco] = e.target.id.split('--');
     const indexOfObj = students.findIndex(obj => obj.id === Number(taco));

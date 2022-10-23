@@ -1,8 +1,15 @@
 body {
-  background-color: mistyrose;
+  background-color: peru;
+  /* background-image: url(./Media/hogwarts.png);
+  background-repeat: no-repeat;
+  background-size: contain; */
+  padding: 20px 10px 100px 10px;
 }
 
 #welcome {
+  width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
   display: flex;
   justify-content: center;
 }
@@ -11,8 +18,57 @@ body {
   display: flex;
 }
 
+.welcome-card {
+  width: 50%;
+}
+
+.welcome-card-body {
+  margin: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .card {
-  width: 200px;
+  height: 350px;
+  margin: 10px;
+  flex: 0 1 calc(50% - 20px);
+  display: flex;
+  flex-direction: column;
+  border: none;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.expelled-card-body {
+  background-color: #e7dddd;
+  text-align: center;
+}
+
+.card-text {
+  font-size: 15px;
+}
+
+#student-cards,
+#expelled-cards {
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
+}
+
+
+.img-container {
+  height: 50%;
+  display: flex;
+  padding: 10px;
+}
+
+.card-img-top {
+  object-fit: contain;
 }
 
 .Gryffindor {
@@ -73,4 +129,12 @@ body {
 .Ravenclaw-btn:hover {
   background-color: #15255c;
   color: #946B2D;
+}
+
+.expelled-img {
+  background-color: #4d5c3c;
+}
+
+.card-btn {
+  margin-top: auto;
 }
