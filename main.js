@@ -118,7 +118,7 @@ const cardsOnDom = (array, div) => {
 }
 // Creates new student when the Sort button is pressed
 const newStudent = (event) => {
-  event.preventDefault;
+  event.preventDefault();
   const randomHouse = () => {
     const randNum = Math.floor(Math.random() * 4 + 1);
     switch (randNum) {
@@ -143,9 +143,9 @@ const newStudent = (event) => {
     house: randomHouse(),
     type: 'student'
   }
+  form.reset();
   students.push(student);
   cardsOnDom(students, '#student-cards');
-  form.reset();
 }
 // Filters for the House Buttons
 const houseFilter = (event) => {
