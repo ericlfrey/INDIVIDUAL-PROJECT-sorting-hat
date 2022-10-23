@@ -95,11 +95,11 @@ const cardsOnDom = (array, div) => {
   for (obj of array) {
     if (obj.type === 'student') {
       domString += `<div class="card" style="width: 18rem;">
-    <img class="card-img-top" src="" alt="Card image cap">
-    <div class="card-body">
+    <img class="card-img-top ${obj.house}" src="./Media/${obj.house}.png" alt="${obj.house} Crest">
+    <div class="card-body ${obj.house}-card">
       <h5 class="card-title">${obj.name}</h5>
       <p class="card-text">${obj.house}</p>
-      <a href="#" class="btn btn-danger" id="expel--${obj.id}">Expelliarmus!</a>
+      <a href="#" class="btn ${obj.house} ${obj.house}-btn" id="expel--${obj.id}">Expelliarmus!</a>
     </div>
   </div>`
     } else if (obj.type === 'expelled') {
