@@ -20,11 +20,11 @@ The ideal user would be someone that wants a fun way to randomly assign a group 
 [Project Board](https://docs.google.com/presentation/d/1PIei0ExGWYerOwPYNsaPQw9Dp6TKwu-oBOoPlRbuMoQ/edit#slide=id.p)
 
 ## Code Snippet
-![Alt text](https://user-images.githubusercontent.com/107942776/197423202-6d2e3cff-4941-4409-9931-f157bdf038e6.png?raw=true "Title")
+<img src="https://user-images.githubusercontent.com/107942776/197423202-6d2e3cff-4941-4409-9931-f157bdf038e6.png" width="500"/>
 
 ## Screen Shots
-![Alt text](https://user-images.githubusercontent.com/107942776/197423187-54abc619-dfee-4671-9a05-5829b01ac6c1.png?raw=true "Title")
-![Alt text](https://user-images.githubusercontent.com/107942776/197423195-4adea904-538e-41ae-bb28-5eabee83fa25.png?raw=true "Title")
+<img src="https://user-images.githubusercontent.com/107942776/197423187-54abc619-dfee-4671-9a05-5829b01ac6c1.png" width="500"/>
+<img src="https://user-images.githubusercontent.com/107942776/197423195-4adea904-538e-41ae-bb28-5eabee83fa25.png" width="500"/>
 
 ## Contributors
 -[Eric Frey](https://github.com/ericlfrey)
