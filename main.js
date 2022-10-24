@@ -170,6 +170,7 @@ const houseFilter = (event) => {
 
 //**** Event Listeners
 
+
 // Runs populate() when Welcome Card button is pressed
 welcome.addEventListener('click', e => {
   if (e.target.id === 'welcomeBtn') {
@@ -225,12 +226,3 @@ const startApp = () => {
   welcomeCard();
 }
 startApp();
-
-
-
-{/* <div class="input-group mb-3">
-  <input type="text" class="form-control" placeholder="Witch/Wizard Name:" id="name" autocomplete="off" required>
-  <div class="input-group-append">
-    <button class="btn btn-dark sort" type="submit">Sort!</button>
-  </div>
-</div> */}
