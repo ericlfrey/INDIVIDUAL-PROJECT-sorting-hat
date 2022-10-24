@@ -57,11 +57,11 @@ const renderToDom = (divId, html) => {
 // Card on Welcome Screen
 const welcomeCard = () => {
   let domString = `<div class="welcome-card">
-  <img src="https://www.pngkey.com/png/full/106-1067907_sorting-hat-png-harry-potter-sorting-hat-png.png" class="card-img-top" alt="Hogwarts Sorting Hat">
+  <img class="welcome-img" src="https://www.pngkey.com/png/full/106-1067907_sorting-hat-png-harry-potter-sorting-hat-png.png" class="card-img-top" alt="Hogwarts Sorting Hat">
   <div class="welcome-card-body">
-    <h5 class="card-title">Welcome to Hogwarts!</h5>
-    <p class="card-text">Before classes begin, all young Witches and Wizards must be sorted into a House!</p>
-    <a href="#"  id='welcomeBtn' class="btn btn-dark">Get Started</a>
+    <h5 class="card-title welcome-card-title">Behold! I am the Sorting Hat!</h5>
+    <p class="card-text welcome-card-text">Before classes begin, all young Witches and Wizards must be sorted into a House!</p>
+    <a href="#"  id='welcomeBtn' class="btn btn-dark">Get Sorted</a>
   </div>
 </div>
 `;
@@ -69,8 +69,8 @@ const welcomeCard = () => {
 }
 // Populate DOM with HTML when button on welcome card is pressed
 const populate = () => {
-  const domString = `<h1>Welcome to Hogwarts</h1>
-  <form id="form">
+  const domString =
+    `<form id="form">
     <div class="input-group mb-3">
       <input type="text" class="form-control" placeholder="Witch/Wizard Name:" aria-label="Recipient's username" aria-describedby="basic-addon2" id="name" required>
       <div class="input-group-append">
@@ -78,11 +78,12 @@ const populate = () => {
       </div>
     </div>
   <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-    <button type="button" class="btn btn-secondary" id="all">All</button>
-    <button type="button" class="btn btn-danger" id="gryffindor">Gryffindor</button>
-    <button type="button" class="btn btn-warning" id="hufflepuff">Hufflepuff</button>
-    <button type="button" class="btn btn-primary" id="ravenclaw">Ravenclaw</button>
-    <button type="button" class="btn btn-success" id="slytherin">Slytherin</button>
+      <button type="button" class="btn btn-secondary filter-btn" id="all">All Houses</button>    
+      <button type="button" class="btn Gryffindor filter-btn" id="gryffindor">Gryffindor</button>    
+      <button type="button" class="btn Hufflepuff filter-btn" id="hufflepuff">Hufflepuff</button>    
+      <button type="button" class="btn Ravenclaw filter-btn" id="ravenclaw">Ravenclaw</button>    
+      <button type="button" class="btn Slytherin filter-btn" id="slytherin">Slytherin</button>
+    </div>
   </div>`;
   welcomeDiv.style.display = 'none';
   renderToDom('#page', domString);
