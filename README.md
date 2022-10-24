@@ -1,7 +1,7 @@
 # Sorting Hat
 This was a project for the NSS Front End Web Dev program. Welcome to Hogwarts! All new students must be sorted into a House. This program allows the user to add students to be randomly assigned to the 4 different Hogwarts houses. If the student is expelled, then they are sent to join Voldemort's army. They can then be deleted from the app by using the Unspeakable curse!!!
 
-<a href="https://elfrey-sorting-hat-project.netlify.app/" target="_blank">View App </a>
+[View App](https://elfrey-sorting-hat-project.netlify.app/)
 
 ## About the user
 The ideal user would be someone that wants a fun way to randomly assign a group of people to smaller groups.
