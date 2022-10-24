@@ -44,6 +44,7 @@ const expelled = [
 const page = document.querySelector('#page');
 const welcomeDiv = document.querySelector('#welcome');
 const welcomeBtn = document.querySelector('#welcomeBtn');
+const cardTitles = document.querySelector('#card-titles')
 const cards = document.querySelector('#cards');
 const studentCards = document.querySelector('#student-cards');
 const expelledCards = document.querySelector('#expelled-cards');
@@ -57,11 +58,11 @@ const renderToDom = (divId, html) => {
 // Card on Welcome Screen
 const welcomeCard = () => {
   let domString = `<div class="welcome-card">
-  <img src="https://www.pngkey.com/png/full/106-1067907_sorting-hat-png-harry-potter-sorting-hat-png.png" class="card-img-top" alt="Hogwarts Sorting Hat">
+  <img class="welcome-img" src="https://www.pngkey.com/png/full/106-1067907_sorting-hat-png-harry-potter-sorting-hat-png.png" class="card-img-top" alt="Hogwarts Sorting Hat">
   <div class="welcome-card-body">
-    <h5 class="card-title">Welcome to Hogwarts!</h5>
-    <p class="card-text">Before classes begin, all young Witches and Wizards must be sorted into a House!</p>
-    <a href="#"  id='welcomeBtn' class="btn btn-dark">Get Started</a>
+    <h5 class="card-title welcome-card-title">Behold! I am the Sorting Hat!</h5>
+    <p class="card-text welcome-card-text">Before classes begin, all young Witches and Wizards must be sorted into a House!</p>
+    <a href="#"  id='welcomeBtn' class="btn btn-dark">Get Sorted</a>
   </div>
 </div>
 `;
@@ -69,22 +70,22 @@ const welcomeCard = () => {
 }
 // Populate DOM with HTML when button on welcome card is pressed
 const populate = () => {
-  const domString = `<h1>Welcome to Hogwarts</h1>
-  <form id="form">
+  const domString =
+    `<form id="form">
     <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Witch/Wizard Name:" aria-label="Recipient's username" aria-describedby="basic-addon2" id="name" required>
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="submit">Sort!</button>
-      </div>
-    </div>
+  <input type="text" class="form-control" id="name" placeholder="Witch/Wizard Name:" aria-label="Witch/Wizard Name:" aria-describedby="button-addon2" autocomplete="off" required>
+  <button class="btn btn-dark" type="button" id="button-addon2">Sort!</button>
+</div>
   <div class="btn-group" role="group" aria-label="Basic mixed styles example">
-    <button type="button" class="btn btn-secondary" id="all">All</button>
-    <button type="button" class="btn btn-danger" id="gryffindor">Gryffindor</button>
-    <button type="button" class="btn btn-warning" id="hufflepuff">Hufflepuff</button>
-    <button type="button" class="btn btn-primary" id="ravenclaw">Ravenclaw</button>
-    <button type="button" class="btn btn-success" id="slytherin">Slytherin</button>
+      <button type="button" class="btn btn-secondary filter-btn" id="all">All Houses</button>    
+      <button type="button" class="btn Gryffindor filter-btn" id="gryffindor">Gryffindor</button>    
+      <button type="button" class="btn Hufflepuff filter-btn" id="hufflepuff">Hufflepuff</button>    
+      <button type="button" class="btn Ravenclaw filter-btn" id="ravenclaw">Ravenclaw</button>    
+      <button type="button" class="btn Slytherin filter-btn" id="slytherin">Slytherin</button>
+    </div>
   </div>`;
   welcomeDiv.style.display = 'none';
+  cardTitles.style.display = 'flex';
   renderToDom('#page', domString);
   cardsOnDom(students, '#student-cards');
   cardsOnDom(expelled, '#expelled-cards');
@@ -108,8 +109,9 @@ const cardsOnDom = (array, div) => {
     <img class="card-img-top" src="./Media/death-eater.png" alt="Death Eater Image"></div>
     <div class="card-body expelled-card-body">
       <h6 class="card-title">${obj.name}</h6>
+      <p class="card-text reason">Reason for expulsion:</p>
       <p class="card-text">${obj.reason}</p>
-      <a href="#" class="btn btn-sm btn-dark card-btn" id="become--${obj.id}">Avada Kedavra!</a>
+      <a href="#" class="btn btn-sm btn-dark card-btn delete-btn" id="become--${obj.id}">Avada Kedavra!</a>
     </div>
   </div>`
     }
@@ -223,3 +225,12 @@ const startApp = () => {
   welcomeCard();
 }
 startApp();
+
+
+
+{/* <div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Witch/Wizard Name:" id="name" autocomplete="off" required>
+  <div class="input-group-append">
+    <button class="btn btn-dark sort" type="submit">Sort!</button>
+  </div>
+</div> */}
