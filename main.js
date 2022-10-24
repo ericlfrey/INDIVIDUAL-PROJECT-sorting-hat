@@ -74,7 +74,7 @@ const populate = () => {
     `<form id="form">
     <div class="input-group mb-3">
   <input type="text" class="form-control" id="name" placeholder="Witch/Wizard Name:" aria-label="Witch/Wizard Name:" aria-describedby="button-addon2" autocomplete="off" required>
-  <button class="btn btn-dark" type="button" id="button-addon2">Sort!</button>
+  <button class="btn btn-dark" type="submit" id="button-addon2">Sort!</button>
 </div>
   <div class="btn-group" role="group" aria-label="Basic mixed styles example">
       <button type="button" class="btn btn-secondary filter-btn" id="all">All Houses</button>    
