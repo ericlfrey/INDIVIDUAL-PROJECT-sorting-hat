@@ -1,12 +1,10 @@
 body {
   background-color: peru;
-  /* background-image: url(./Media/hogwarts.png);
+  background-image: url(./Media/hogwarts.png);
   background-repeat: no-repeat;
-  background-size: contain; */
+  background-size: 100px;
   padding: 20px 10px 100px 10px;
-  /* font-family: 'Harry Potter', sans-serif; */
   font-family: 'Cormorant Garamond', serif;
-
 }
 
 .heading {
@@ -14,6 +12,7 @@ body {
   font-family: 'Harry Potter', sans-serif;
   font-size: 3em;
   margin: 50px 0;
+  text-shadow: 0 0 3px gold;
 }
 
 #welcome {
@@ -23,11 +22,20 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-shadow: 0 0 1px gold;
 }
 
 #page {
   display: flex;
   justify-content: center;
+}
+
+#card-titles {
+  display: none;
+  justify-content: space-around;
+  font-family: 'Harry Potter', sans-serif;
+  text-shadow: 0 0 3px gold;
+  margin: 30px 0 20px 0;
 }
 
 #cards {
@@ -45,6 +53,18 @@ body {
   justify-content: center;
 }
 
+.card-text {
+  font-size: 15px;
+}
+
+.welcome-card-title {
+  font-size: 30px;
+}
+
+.welcome-card-text {
+  font-size: 20px;
+}
+
 .welcome-card-title,
 .welcome-card-text {
   margin: 15px;
@@ -54,33 +74,48 @@ body {
   width: 50%;
 }
 
+#name {
+  background-color: bisque;
+  border: none;
+}
+
+#name:focus {
+  border: none;
+  box-shadow: none;
+}
+
+.btn-dark,
+.btn-dark:hover {
+  color: bisque;
+}
+
 .btn-group {
   margin-bottom: 30px;
 }
 
 .card {
   border-radius: 5px;
-  height: 350px;
+  height: 300px;
   margin: 10px;
   flex: 0 1 calc(50% - 20px);
-  /* display: flex;
-  flex-direction: column; */
-  border: solid 1px red;
+  border: none;
 }
 
 .card-body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.reason {
+  margin: 0;
 }
 
 .expelled-card-body {
-  background-color: #e7dddd;
+  background-color: bisque;
   text-align: center;
-}
-
-.card-text {
-  font-size: 15px;
 }
 
 #student-cards,
@@ -90,11 +125,12 @@ body {
   width: 50%;
 }
 
-
 .img-container {
-  height: 50%;
+  height: 30%;
   display: flex;
   padding: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .card-img-top {
@@ -113,7 +149,7 @@ body {
 
 .Slytherin {
   background-color: #1A472A;
-  color: #747474;
+  color: #898989;
 }
 
 .Ravenclaw {
@@ -132,7 +168,7 @@ body {
 }
 
 .Slytherin-card {
-  background-color: #747474;
+  background-color: #898989;
   color: #1A472A;
 }
 
@@ -141,24 +177,33 @@ body {
   color: #0E1A40;
 }
 
+button.Gryffindor:hover,
 .Gryffindor-btn:hover {
   background-color: #5c0002;
   color: #D3A625;
 }
 
+button.Hufflepuff:hover,
 .Hufflepuff-btn:hover {
   background-color: #d0a22e;
   color: #000000;
 }
 
+button.Slytherin:hover,
 .Slytherin-btn:hover {
   background-color: #143720;
-  color: #747474;
+  color: #898989;
 }
 
+button.Ravenclaw:hover,
 .Ravenclaw-btn:hover {
   background-color: #15255c;
   color: #946B2D;
+}
+
+.delete-btn,
+.delete-btn:hover {
+  color: bisque;
 }
 
 .expelled-img {

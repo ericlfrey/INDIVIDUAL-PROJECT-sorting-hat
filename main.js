@@ -44,6 +44,7 @@ const expelled = [
 const page = document.querySelector('#page');
 const welcomeDiv = document.querySelector('#welcome');
 const welcomeBtn = document.querySelector('#welcomeBtn');
+const cardTitles = document.querySelector('#card-titles')
 const cards = document.querySelector('#cards');
 const studentCards = document.querySelector('#student-cards');
 const expelledCards = document.querySelector('#expelled-cards');
@@ -72,11 +73,9 @@ const populate = () => {
   const domString =
     `<form id="form">
     <div class="input-group mb-3">
-      <input type="text" class="form-control" placeholder="Witch/Wizard Name:" aria-label="Recipient's username" aria-describedby="basic-addon2" id="name" required>
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="submit">Sort!</button>
-      </div>
-    </div>
+  <input type="text" class="form-control" id="name" placeholder="Witch/Wizard Name:" aria-label="Witch/Wizard Name:" aria-describedby="button-addon2" autocomplete="off" required>
+  <button class="btn btn-dark" type="button" id="button-addon2">Sort!</button>
+</div>
   <div class="btn-group" role="group" aria-label="Basic mixed styles example">
       <button type="button" class="btn btn-secondary filter-btn" id="all">All Houses</button>    
       <button type="button" class="btn Gryffindor filter-btn" id="gryffindor">Gryffindor</button>    
@@ -86,6 +85,7 @@ const populate = () => {
     </div>
   </div>`;
   welcomeDiv.style.display = 'none';
+  cardTitles.style.display = 'flex';
   renderToDom('#page', domString);
   cardsOnDom(students, '#student-cards');
   cardsOnDom(expelled, '#expelled-cards');
@@ -109,8 +109,9 @@ const cardsOnDom = (array, div) => {
     <img class="card-img-top" src="./Media/death-eater.png" alt="Death Eater Image"></div>
     <div class="card-body expelled-card-body">
       <h6 class="card-title">${obj.name}</h6>
+      <p class="card-text reason">Reason for expulsion:</p>
       <p class="card-text">${obj.reason}</p>
-      <a href="#" class="btn btn-sm btn-dark card-btn" id="become--${obj.id}">Avada Kedavra!</a>
+      <a href="#" class="btn btn-sm btn-dark card-btn delete-btn" id="become--${obj.id}">Avada Kedavra!</a>
     </div>
   </div>`
     }
@@ -224,3 +225,12 @@ const startApp = () => {
   welcomeCard();
 }
 startApp();
+
+
+
+{/* <div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Witch/Wizard Name:" id="name" autocomplete="off" required>
+  <div class="input-group-append">
+    <button class="btn btn-dark sort" type="submit">Sort!</button>
+  </div>
+</div> */}
