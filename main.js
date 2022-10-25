@@ -59,7 +59,7 @@ const renderToDom = (divId, html) => {
 const welcomeCard = () => {
   let domString = `<div class="welcome-card">
   <img class="welcome-img" src="https://www.pngkey.com/png/full/106-1067907_sorting-hat-png-harry-potter-sorting-hat-png.png" class="card-img-top" alt="Hogwarts Sorting Hat">
-  <div class="welcome-card-body">
+  <div class="welcome-card-body" autofocus>
     <h5 class="card-title welcome-card-title">Behold! I am the Sorting Hat!</h5>
     <p class="card-text welcome-card-text">Before classes begin, all young Witches and Wizards must be sorted into a House!</p>
     <a href="#"  id='welcomeBtn' class="btn btn-dark">Get Sorted</a>
@@ -172,11 +172,16 @@ const houseFilter = (event) => {
 
 
 // Runs populate() when Welcome Card button is pressed
-welcome.addEventListener('click', e => {
+welcomeDiv.addEventListener('click', e => {
   if (e.target.id === 'welcomeBtn') {
     populate();
   }
 });
+document.querySelector('body').addEventListener('keypress', e => {
+  if (e.key === 'Enter' && welcomeBtn) {
+    console.log('enter key')
+  }
+})
 // Moves cards from Students to Expelled, and removes cards from Expelled.
 cards.addEventListener('click', e => {
   e.preventDefault();
