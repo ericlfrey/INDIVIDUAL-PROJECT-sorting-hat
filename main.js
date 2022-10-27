@@ -46,7 +46,16 @@ const students = [
     student: false,
     reason: 'For being the mf Dark Lord!',
     alive: true
+  },
+  {
+    id: 7,
+    name: 'Myrtle Elizabeth Warren',
+    house: 'Ravenclaw',
+    student: true,
+    reason: '',
+    alive: false
   }
+
 ];
 
 //**** Query Selectors
@@ -92,9 +101,11 @@ const welcomeCard = () => {
   renderToDom('#welcome', domString);
 }
 // Populate DOM with HTML when button on welcome card is pressed
-const populate = () => {
-  const domString =
-    `<form id="form">
+const populate = (e) => {
+  if (e.target.id === 'welcomeBtn') {
+    // New Student Form, Filter Button Group
+    const domString =
+      `<form id="form">
     <div class="input-group mb-3">
   <input type="text" class="form-control" id="name" placeholder="Witch/Wizard Name:" aria-label="Witch/Wizard Name:" aria-describedby="button-addon2" autocomplete="off" required>
   <button class="btn btn-dark" type="submit" id="button-addon2">Sort!</button>
@@ -107,7 +118,8 @@ const populate = () => {
       <button type="button" class="btn Slytherin filter-btn" id="slytherin">Slytherin</button>
     </div>
   </div>`;
-  const houseCrestModalStr = `
+    // Edit Student Modal
+    const houseCrestModalStr = `
   <div class="modal fade" id="houseCrestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -153,12 +165,13 @@ const populate = () => {
     </div>
   </div>
     </div>`;
-  welcomeDiv.style.display = 'none';
-  cardTitles.style.display = 'flex';
-  renderToDom('#page', domString);
-  renderToDom('#houseCrestDiv', houseCrestModalStr)
-  cardsOnDom(students, '#student-cards', '#expelled-cards');
-};
+    welcomeDiv.style.display = 'none';
+    cardTitles.style.display = 'flex';
+    renderToDom('#page', domString);
+    renderToDom('#houseCrestDiv', houseCrestModalStr)
+    cardsOnDom(students, '#student-cards', '#expelled-cards');
+  }
+}
 // Puts the cards on the DOM in the different Divs, 
 // also handles the Resurrection Modal
 const cardsOnDom = (array, ...div) => {
@@ -188,8 +201,7 @@ const cardsOnDom = (array, ...div) => {
               ...
             </div>
             <div class="select-student">
-              <select class="form-select" aria-label="Default select example" id="angelSelect">
-                <option selected id="notAChoice" value="notAChoice">Choose Student to Resurrect</option>
+              <select class="form-select" aria-label="Default select example" id="angelSelect">                
                 ${listStr}
               </select>
             </div>
@@ -205,7 +217,7 @@ const cardsOnDom = (array, ...div) => {
     hallows.innerHTML = '';
   }
   // Cards on the page:
-  for (obj of aliveStudents) {
+  aliveStudents.sort((a, b) => a.house.localeCompare(b.house)).forEach(obj => {
     if (obj.student) {
       studentString += `<div class="card"><div class="img-container ${obj.house}">
     <img class="card-img-top ${obj.house} house-crest" src="./Media/${obj.house}.png" alt="${obj.house} Crest" data-bs-toggle="modal" data-bs-target="#houseCrestModal" id="houseCrest--${obj.id}"></div>
@@ -216,7 +228,9 @@ const cardsOnDom = (array, ...div) => {
     </div>
   </div>`
     }
-    else if (!obj.student) {
+  })
+  aliveStudents.sort((a, b) => a.name.localeCompare(b.name)).forEach(obj => {
+    if (!obj.student) {
       expelledString += `<div class="card"><div class="img-container expelled-img">
     <img class="card-img-top house-crest" src="./Media/death-eater.png" alt="Death Eater Image" data-bs-toggle="modal" data-bs-target="#houseCrestModal" id="houseCrest--${obj.id}"></div>
     <div class="card-body expelled-card-body">
@@ -228,7 +242,7 @@ const cardsOnDom = (array, ...div) => {
     </div>
   </div>`
     }
-  }
+  })
   renderToDom(div[0], studentString);
   renderToDom(div[1], expelledString);
 }
@@ -340,18 +354,8 @@ const editStudent = (event) => {
   }
   cardsOnDom(students, '#student-cards', '#expelled-cards');
 }
-
-//**** Event Listeners
-
-// Runs populate() when Welcome Card button is pressed
-welcomeDiv.addEventListener('click', e => {
-  if (e.target.id === 'welcomeBtn') {
-    populate();
-  }
-});
-
-// Moves Students to Death Eaters, and Killing Curse
-cards.addEventListener('click', e => {
+// Expel, Appeal, and Killing Curse
+const cardBtns = (e) => {
   e.preventDefault();
   if (e.target.id.includes('expel')) {
     [, taco] = e.target.id.split('--');
@@ -361,16 +365,16 @@ cards.addEventListener('click', e => {
     const randReason = () => {
       switch (randNum(4)) {
         case 1:
-          return 'Being a turd'
+          return 'Failed O.W.L. exams'
           break;
         case 2:
-          return 'Unspeakable Curse'
+          return 'Sucking at Magic'
           break;
         case 3:
           return 'Some Death Eater Shit'
           break;
         case 4:
-          return 'Being a total dick'
+          return 'Being a total knob'
           break;
       }
     }
@@ -388,13 +392,23 @@ cards.addEventListener('click', e => {
     reinstatedStudent.student = true;
   }
   cardsOnDom(students, '#student-cards', '#expelled-cards');
-});
-// Creates a new Student Card
+}
+
+//**** Event Listeners
+
+// Handles the Welcome Page Button
+welcomeDiv.addEventListener('click', populate);
+// Handles the Card Buttons for Expel, Appeal, and Killing Curse
+cards.addEventListener('click', cardBtns);
+// Handles the Submit New Student Form
 page.addEventListener('submit', newStudent);
-// Filters for the House Buttons
+// Handles the Filters for the House Buttons
 page.addEventListener('click', houseFilter);
+// Handles the Resurrection Modal Button
 hallows.addEventListener('click', purgatory);
+// Handles the Edit Student Modal Button
 body.addEventListener('click', studentForm);
+// Handles the Edit Student Modal Save Button
 houseCrestDiv.addEventListener('click', editStudent);
 
 // Initial Page Load
