@@ -107,7 +107,7 @@ const populate = () => {
       <button type="button" class="btn Slytherin filter-btn" id="slytherin">Slytherin</button>
     </div>
   </div>`;
-  let houseCrestModalStr = `
+  const houseCrestModalStr = `
   <div class="modal fade" id="houseCrestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -159,12 +159,14 @@ const populate = () => {
   renderToDom('#houseCrestDiv', houseCrestModalStr)
   cardsOnDom(students, '#student-cards', '#expelled-cards');
 };
-// Puts the cards in the different Divs
+// Puts the cards on the DOM in the different Divs, 
+// also handles the Resurrection Modal
 const cardsOnDom = (array, ...div) => {
   let studentString = '';
   let expelledString = '';
   const aliveStudents = array.filter(item => item.alive);
   const deceasedStudents = array.filter(item => !item.alive);
+  // Resurrection Modal
   if (deceasedStudents.length > 0) {
     let listStr = ``;
     for (angel of deceasedStudents) {
@@ -174,34 +176,35 @@ const cardsOnDom = (array, ...div) => {
     let modalStr = `
       <img src="./Media/hallows.png" alt="The Deathly Hallows" class="hallows-img" id="resStone" data-bs-toggle="modal" data-bs-target="#exampleModal">
 
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="select-student">
+              <select class="form-select" aria-label="Default select example" id="angelSelect">
+                <option selected id="notAChoice" value="notAChoice">Choose Student to Resurrect</option>
+                ${listStr}
+              </select>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="resBtn">Resurrect!</button>
+            </div>
+          </div>
         </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="select-student">
-          <select class="form-select" aria-label="Default select example" id="angelSelect">
-            <option selected id="notAChoice" value="notAChoice">Choose Student to Resurrect</option>
-            ${listStr}
-          </select>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="resBtn">Resurrect!</button>
-        </div>
-      </div>
-    </div>
-  </div>`;
+      </div>`;
     renderToDom('#hallows', modalStr);
   }
   else if (deceasedStudents.length === 0) {
     hallows.innerHTML = '';
   }
+  // Cards on the page:
   for (obj of aliveStudents) {
     if (obj.student) {
       studentString += `<div class="card"><div class="img-container ${obj.house}">
@@ -232,6 +235,7 @@ const cardsOnDom = (array, ...div) => {
 // Creates new student when the Sort button is pressed
 const newStudent = (event) => {
   event.preventDefault();
+  // Randomizer to choose House
   const randomHouse = () => {
     switch (randNum(4)) {
       case 1:
@@ -248,6 +252,7 @@ const newStudent = (event) => {
         break;
     }
   }
+  // Building new Student Object
   const student =
   {
     id: students.length + 1,
@@ -303,8 +308,10 @@ const studentForm = (event) => {
     const crestIndex = students.findIndex(obj => obj.id === Number(taco));
     const editingStudent = students[crestIndex];
     document.querySelector('#editName').value = editingStudent.name;
+    // this is the money line here- sets the value of the button on the Modal to the id of the Student, so you can tartget and edit with another event listener
+    //$$$$$$$$$$$$$
     document.querySelector('#editStudentSave').value = editingStudent.id;
-    console.log(document.querySelector('#editStudentSave').value);
+    //$$$$$$$$$$$$$
     document.querySelector('#houseChoiceSelect').value = editingStudent.house;
     const studentYes = document.querySelector('#studentYes');
     const studentNo = document.querySelector('#studentNo');
@@ -318,6 +325,7 @@ const studentForm = (event) => {
 // Takes info from the Edit Modal and updates the student card and repopulates the DOM
 const editStudent = (event) => {
   if (event.target.id === 'editStudentSave') {
+    // Gets the value of the button set in studentForm() function $$$$$$$$$
     const currentStudentIndex = students.findIndex(obj => obj.id === Number(event.target.value))
     const currentStudent = students[currentStudentIndex];
     currentStudent.name = document.querySelector('#editName').value;
@@ -342,13 +350,14 @@ welcomeDiv.addEventListener('click', e => {
   }
 });
 
-// Moves cards from Students to Expelled, and removes cards from Expelled.
+// Moves Students to Death Eaters, and Killing Curse
 cards.addEventListener('click', e => {
   e.preventDefault();
   if (e.target.id.includes('expel')) {
     [, taco] = e.target.id.split('--');
     const studentIndex = students.findIndex(obj => obj.id === Number(taco));
     const expelledStudent = students[studentIndex];
+    // Expelled Student Reason Randomizer
     const randReason = () => {
       switch (randNum(4)) {
         case 1:
@@ -370,7 +379,6 @@ cards.addEventListener('click', e => {
   } else if (e.target.id.includes('become')) {
     [, taco] = e.target.id.split('--');
     const studentIndex = students.findIndex(obj => obj.id === Number(taco));
-    // expelled.splice(studentIndex, 1);
     const cursedStudent = students[studentIndex];
     cursedStudent.alive = false;
   } else if (e.target.id.includes('appeal')) {
