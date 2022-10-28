@@ -1,11 +1,26 @@
 body {
   background-color: peru;
-  background-image: url(./Media/hogwarts.png);
-  background-repeat: no-repeat;
-  background-size: 100px;
-  background-position: 20px 40px;
+  background-image: url(./Media/marauder-back.png);
+  background-position: initial;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background-size: auto;
   padding: 20px 10px 0 10px;
   font-family: 'Cormorant Garamond', serif;
+  color: saddlebrown;
+}
+
+.heading-container {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.hogwarts-crest {
+  float: left;
+  height: 100px;
 }
 
 #hallows {
@@ -16,15 +31,20 @@ body {
 }
 
 .hallows-img {
-  height: 25px;
+  height: 90%;
+}
+
+.hallows-img:hover {
+  filter: drop-shadow(0 0 5px rgb(51, 49, 49));
+  height: 95%;
 }
 
 .heading {
-  text-align: center;
   font-family: 'Cinzel', serif;
   font-size: 2.5em;
   margin-top: 50px;
-  text-shadow: 0 0 3px gold;
+  margin-right: 100px;
+  text-shadow: 0 0 1px black;
 }
 
 #welcome {
@@ -34,7 +54,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  text-shadow: 0 0 1px gold;
+  text-shadow: 0 0 1px black;
 }
 
 #page {
@@ -46,7 +66,7 @@ body {
   display: none;
   justify-content: space-between;
   font-family: 'Cinzel', serif;
-  text-shadow: 0 0 3px gold;
+  text-shadow: 0 0 1px black;
   margin: 30px 0 20px 0;
 }
 
@@ -89,12 +109,23 @@ body {
 
 #welcomeBtn:focus {
   border: none;
-  box-shadow: none;
+  box-shadow: -3px 3px 5px rgb(42, 42, 42);
   background-color: #212529;
 }
 
+#welcomeBtn {
+  color: beige;
+  box-shadow: -3px 3px 5px rgb(42, 42, 42);
+}
+
+#welcomeBtn:hover {
+  color: beige;
+  box-shadow: -3px 3px 5px rgb(42, 42, 42);
+  background-color: #424649;
+}
+
 #name {
-  background-color: bisque;
+  background-color: beige;
   border: none;
 }
 
@@ -105,7 +136,7 @@ body {
 
 .btn-dark,
 .btn-dark:hover {
-  color: bisque;
+  color: beige;
 }
 
 .btn-group {
@@ -125,7 +156,7 @@ body {
 }
 
 .expelled-card-body {
-  background-color: bisque;
+  background-color: beige;
   text-align: center;
 }
 
@@ -144,10 +175,11 @@ body {
 
 .card {
   border-radius: 5px;
-  height: 300px;
+  height: 350px;
   margin: 10px;
   flex: 0 1 calc(50% - 20px);
   border: none;
+  box-shadow: -3px 3px 5px rgb(42, 42, 42);
 }
 
 .img-container {
@@ -164,6 +196,29 @@ body {
 
 .house-crest:hover {
   height: 110%;
+}
+
+.input-group,
+.btn-group,
+#resBtn,
+#editStudentSave,
+#angelSelect,
+#editName,
+#houseChoiceSelect,
+#studentYes,
+#studentNo,
+.welcome-img {
+  filter: drop-shadow(-3px 3px 5px rgb(42, 42, 42));
+}
+
+#angelSelect:focus,
+#houseChoiceSelect:focus,
+#studentYes,
+#studentNo,
+#editName:focus {
+  border-color: beige;
+  box-shadow: none;
+  filter: drop-shadow(-3px 3px 5px rgb(42, 42, 42));
 }
 
 .Gryffindor {
@@ -231,8 +286,10 @@ button.Ravenclaw:hover,
 }
 
 .delete-btn,
-.delete-btn:hover {
-  color: bisque;
+.delete-btn:hover,
+#all,
+#all:hover {
+  color: beige;
 }
 
 .expelled-img {
@@ -241,6 +298,39 @@ button.Ravenclaw:hover,
 
 .card-btn {
   margin-top: auto;
+}
+
+.appeal-btn {
+  border: solid 1px grey;
+}
+
+.modal-content {
+  background-image: url(./Media/paper.png);
+  box-shadow: -3px 3px 5px rgb(42, 42, 42);
+  color: #212529;
+  text-shadow: 0 0 1px black;
+  font-size: 15px;
+  text-align: center;
+}
+
+.modal-header,
+.modal-footer {
+  border: none;
+}
+
+select,
+select:focus {
+  background-color: beige;
+  box-shadow: none;
+}
+
+.stone {
+  height: 100px;
+  filter: drop-shadow(-3px 3px 5px rgb(42, 42, 42));
+}
+
+#studentChoice {
+  margin-top: 20px;
 }
 
 .footer {
