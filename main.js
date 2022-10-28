@@ -69,6 +69,10 @@ const renderToDom = (divId, html) => {
 const randNum = (num) => {
   return Math.floor(Math.random() * num + 1);
 }
+const randomizer = (arr) => {
+  const randomNum = Math.floor(Math.random() * arr.length)
+  return arr[randomNum];
+}
 
 //* Initial Page Load
 const welcomeCardOnDom = () => {
@@ -259,25 +263,16 @@ const expelBtn = (e) => {
     [, taco] = e.target.id.split('--');
     const studentIndex = students.findIndex(obj => obj.id === Number(taco));
     const expelledStudent = students[studentIndex];
-    // Expelled Student Reason Randomizer
-    const randReason = () => {
-      switch (randNum(4)) {
-        case 1:
-          return 'Failed O.W.L. exams'
-          break;
-        case 2:
-          return 'Sucking at Magic'
-          break;
-        case 3:
-          return 'Some Death Eater Shit'
-          break;
-        case 4:
-          return 'Being a total knob'
-          break;
-      }
-    }
+    // array for expulsion reasons
+    const reasons = [
+      'Failed O.W.L. exams',
+      'Sucking at Magic',
+      'Some Death Eater Shit',
+      'Being a total knob',
+      'Using Magic on Muggles'
+    ]
     expelledStudent.student = false;
-    expelledStudent.reason = randReason();
+    expelledStudent.reason = randomizer(reasons);
   }
 }
 const killBtn = (e) => {
@@ -301,29 +296,14 @@ const appealBtn = (e) => {
 // Creates new Student Card
 const newStudent = (e) => {
   e.preventDefault();
-  // Randomizer to choose House
-  const randomHouse = () => {
-    switch (randNum(4)) {
-      case 1:
-        return 'Gryffindor'
-        break;
-      case 2:
-        return 'Ravenclaw'
-        break;
-      case 3:
-        return 'Slytherin'
-        break;
-      case 4:
-        return 'Hufflepuff'
-        break;
-    }
-  }
+  // array for House Randomizer
+  const houses = ['Gryffindor', 'Ravenclaw', 'Slytherin', 'Hufflepuff'];
   // Building new Student Object
   const student =
   {
     id: students.length + 1,
     name: document.querySelector('#name').value,
-    house: randomHouse(),
+    house: randomizer(houses),
     student: true,
     reason: '',
     alive: true
