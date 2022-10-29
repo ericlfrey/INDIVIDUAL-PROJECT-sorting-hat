@@ -1,6 +1,6 @@
 body {
   background-color: peru;
-  background-image: url(./Media/marauder-back.png);
+  background-image: url(../media/marauder-back.png);
   background-position: initial;
   top: 0;
   left: 0;
@@ -324,7 +324,7 @@ button.Ravenclaw-btn.Ravenclaw:active {
 }
 
 .modal-content {
-  background-image: url(./Media/paper.png);
+  background-image: url(../media/paper.png);
   box-shadow: -3px 3px 5px rgb(42, 42, 42);
   color: #212529;
   text-shadow: 0 0 1px black;
