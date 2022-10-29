@@ -49,7 +49,7 @@ const students = [
   }
 ];
 
-//**** Query Selectors
+//**** Global Query Selectors
 const body = document.querySelector('body');
 const page = document.querySelector('#page');
 const welcomeDiv = document.querySelector('#welcome');
@@ -66,9 +66,6 @@ const renderToDom = (divId, html) => {
   selectedDiv.innerHTML = html;
 }
 //******** Random Number Generator
-const randNum = (num) => {
-  return Math.floor(Math.random() * num + 1);
-}
 const randomizer = (arr) => {
   const randomNum = Math.floor(Math.random() * arr.length)
   return arr[randomNum];
@@ -85,20 +82,22 @@ const welcomeCardOnDom = () => {
 </div>
 `;
   renderToDom('#welcome', domString);
+  document.location = '#';
 }
+
+//** HTML on DOM Functions
 
 //** Populates page when Welcome Btn Clicked
 const populate = (e) => {
   if (e.target.id === 'welcomeBtn') {
-    const cardTitles = document.querySelector('#card-titles')
-    welcomeDiv.style.display = 'none';
-    cardTitles.style.display = 'flex';
+    welcomeDiv.innerHTML = '';
     studentEditModalOnDom();
     pageDivOnDom();
+    cardDivTitlesOnDom();
     cardsOnDom(students);
   }
 }
-//** called in populate() - HTML Edit Modal
+//** HTML Edit Modal - called in populate()
 const studentEditModalOnDom = () => {
   const houseCrestModalStr = `
   <div class="modal fade" id="houseCrestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -148,7 +147,7 @@ const studentEditModalOnDom = () => {
     </div>`;
   renderToDom('#houseCrestDiv', houseCrestModalStr);
 }
-//** called in populate() - HTML New Student input & Filter Buttons
+//** HTML New Student input & Filter Buttons - called in populate()
 const pageDivOnDom = () => {
   const domString =
     `<form id="form">
@@ -158,23 +157,29 @@ const pageDivOnDom = () => {
 </div>
   <div class="btn-group" role="group" aria-label="Basic mixed styles example">
       <button type="button" class="btn btn-secondary filter-btn" id="all">All Houses</button>    
-      <button type="button" class="btn Gryffindor filter-btn" id="gryffindor">Gryffindor</button>    
-      <button type="button" class="btn Hufflepuff filter-btn" id="hufflepuff">Hufflepuff</button>    
-      <button type="button" class="btn Ravenclaw filter-btn" id="ravenclaw">Ravenclaw</button>    
-      <button type="button" class="btn Slytherin filter-btn" id="slytherin">Slytherin</button>
+      <button type="button" class="btn Gryffindor filter-btn" id="Gryffindor">Gryffindor</button>    
+      <button type="button" class="btn Hufflepuff filter-btn" id="Hufflepuff">Hufflepuff</button>    
+      <button type="button" class="btn Ravenclaw filter-btn" id="Ravenclaw">Ravenclaw</button>    
+      <button type="button" class="btn Slytherin filter-btn" id="Slytherin">Slytherin</button>
     </div>
   </div>`;
   renderToDom('#page', domString);
 }
-
-//*** Renders HTML cards on the DOM & Hallows Modal
+//** HTML for Card Div Titles - called in populate()
+const cardDivTitlesOnDom = () => {
+  const domString = `
+  <h2>Students</h2>
+    <h2>Voldy's Army</h2>`;
+  renderToDom('#card-titles', domString);
+}
+//** HTML Renders Cards on the DOM & Hallows Modal
 const cardsOnDom = (arr) => {
   const aliveStudents = arr.filter(item => item.alive);
   studentCardsOnDom(aliveStudents);
   expelledCardsOnDom(aliveStudents);
   hallowsModalOnDom();
 };
-//HTML Student Cards
+//** HTML Student Cards - called in cardsOnDom()
 const studentCardsOnDom = (arr) => {
   let studentString = '';
   arr.sort((a, b) => a.house.localeCompare(b.house)).forEach(obj => {
@@ -184,14 +189,14 @@ const studentCardsOnDom = (arr) => {
     <div class="card-body ${obj.house}-card">
       <h5 class="card-title">${obj.name}</h5>
       <h6 class="">${obj.house}</h6>
-      <a href="#" class="btn btn-sm ${obj.house} ${obj.house}-btn card-btn" id="expel--${obj.id}">Expelliarmus!</a>
+      <button href="#" class="btn btn-sm ${obj.house} ${obj.house}-btn student-card-btn" id="expel--${obj.id}">Expelliarmus!</button>
     </div>
   </div>`
     }
   })
   renderToDom('#student-cards', studentString);
 };
-//HTML Expelled Cards
+//** HTML Expelled Cards - called in cardsOnDom()
 const expelledCardsOnDom = (arr) => {
   let expelledString = '';
   arr.sort((a, b) => a.name.localeCompare(b.name)).forEach(obj => {
@@ -202,15 +207,17 @@ const expelledCardsOnDom = (arr) => {
       <h6 class="card-title">${obj.name}</h6>
       <p class="card-text reason">Reason for expulsion:</p>
       <p class="card-text">${obj.reason}</p>
-      <a href="#" class="btn btn-sm btn-dark card-btn delete-btn" id="become--${obj.id}">Avada Kedavra!</a>
-      <a href="#" class="btn btn-sm btn-light card-btn appeal-btn" id="appeal--${obj.id}">Appeal!</a>
+      <div class="exp-card-btns">
+        <a href="#" class="btn btn-sm btn-dark card-btn delete-btn" id="become--${obj.id}">Avada Kedavra!</a>
+        <a href="#" class="btn btn-sm btn-light card-btn appeal-btn" id="appeal--${obj.id}">Appeal!</a>
+      </div>
     </div>
   </div>`
     }
   })
   renderToDom('#expelled-cards', expelledString);
 }
-//HTML Hallows Modal
+//HTML Hallows Modal - called in cardsOnDom()
 const hallowsModalOnDom = () => {
   const deceasedStudents = students.filter(item => !item.alive);
   if (deceasedStudents.length > 0) {
@@ -250,9 +257,13 @@ const hallowsModalOnDom = () => {
     hallows.innerHTML = '';
   }
 };
-//**** Expel, Kill, and Appeal Buttons
+
+
+//**** Button and Form Functions
+
+//**** Card Button Functions
 const cardBtns = (e) => {
-  e.preventDefault();
+  // e.preventDefault();
   expelBtn(e);
   killBtn(e);
   appealBtn(e);
@@ -282,6 +293,7 @@ const killBtn = (e) => {
     const cursedStudent = students[studentIndex];
     cursedStudent.alive = false;
   }
+  document.location = '#';
 }
 const appealBtn = (e) => {
   if (e.target.id.includes('appeal')) {
@@ -292,8 +304,7 @@ const appealBtn = (e) => {
   }
 }
 
-
-// Creates new Student Card
+//**** Creates new Student Card
 const newStudent = (e) => {
   e.preventDefault();
   // array for House Randomizer
@@ -313,25 +324,16 @@ const newStudent = (e) => {
   hallowsModalOnDom()
   cardsOnDom(students);
 }
-// House Filter Buttons
+//**** House Filter Buttons
 const houseFilter = (e) => {
-  if (e.target.id === 'gryffindor') {
-    const gryff = students.filter(obj => obj.house === "Gryffindor" || !obj.student);
-    cardsOnDom(gryff);
-  } else if (e.target.id === 'hufflepuff') {
-    const puff = students.filter(obj => obj.house === "Hufflepuff" || !obj.student);
-    cardsOnDom(puff);
-  } else if (e.target.id === 'ravenclaw') {
-    const raven = students.filter(obj => obj.house === "Ravenclaw" || !obj.student);
-    cardsOnDom(raven);
-  } else if (e.target.id === 'slytherin') {
-    const slither = students.filter(obj => obj.house === "Slytherin" || !obj.student);
-    cardsOnDom(slither);
-  } else if (e.target.id === 'all') {
+  if (e.target.id === 'all') {
     cardsOnDom(students);
+  } else if (e.target.type === 'button') {
+    const houseArr = students.filter(obj => obj.house === e.target.id || !obj.student);
+    cardsOnDom(houseArr);
   }
 }
-// Resurrection Stone
+//**** Resurrection Stone
 const purgatory = (e) => {
   if (e.target.id === 'resBtn') {
     const value = document.querySelector('#angelSelect').value;
@@ -345,7 +347,7 @@ const purgatory = (e) => {
     cardsOnDom(students);
   }
 }
-// Enters Student Data on Student Edit Modal
+//**** Enters Student Data on Student Edit Modal
 const studentForm = (e) => {
   if (e.target.id.includes('houseCrest')) {
     [, taco] = e.target.id.split('--');
@@ -365,7 +367,7 @@ const studentForm = (e) => {
     }
   }
 }
-// Edits Student Data from Student Edit Modal
+//**** Edits Student Data from Student Edit Modal
 const editStudent = (e) => {
   if (e.target.id === 'editStudentSave') {
     // Gets the value of the button set in studentForm() function $$$$$$$$$

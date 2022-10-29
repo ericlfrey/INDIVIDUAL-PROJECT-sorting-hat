@@ -7,7 +7,7 @@ body {
   min-width: 100%;
   min-height: 100%;
   background-size: auto;
-  padding: 20px 10px 0 10px;
+  padding: 0 10px 0 10px;
   font-family: 'Cormorant Garamond', serif;
   color: saddlebrown;
 }
@@ -16,6 +16,7 @@ body {
   display: inline-block;
   width: 100%;
   text-align: center;
+  margin-top: 10px;
 }
 
 .hogwarts-crest {
@@ -42,7 +43,7 @@ body {
 .heading {
   font-family: 'Cinzel', serif;
   font-size: 2.5em;
-  margin-top: 50px;
+  margin-top: 25px;
   margin-right: 100px;
   text-shadow: 0 0 1px black;
 }
@@ -63,11 +64,11 @@ body {
 }
 
 #card-titles {
-  display: none;
+  display: flex;
   justify-content: space-between;
   font-family: 'Cinzel', serif;
   text-shadow: 0 0 1px black;
-  margin: 30px 0 20px 0;
+  margin: 0;
 }
 
 #card-titles>h2 {
@@ -87,7 +88,8 @@ body {
 }
 
 .card-text {
-  font-size: 15px;
+  font-size: 13px;
+  margin: 0;
 }
 
 .welcome-card-title {
@@ -146,9 +148,14 @@ body {
 .card-body {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+
+.exp-card-btns {
+  display: flex;
+  flex-direction: column;
 }
 
 .reason {
@@ -262,25 +269,33 @@ body {
 }
 
 button.Gryffindor:hover,
-.Gryffindor-btn:hover {
+#Gryffindor:active,
+.Gryffindor-btn:hover,
+button.Gryffindor-btn.Gryffindor:active {
   background-color: #5c0002;
   color: #D3A625;
 }
 
 button.Hufflepuff:hover,
-.Hufflepuff-btn:hover {
+#Hufflepuff:active,
+.Hufflepuff-btn:hover,
+button.Hufflepuff-btn.Hufflepuff:active {
   background-color: #d0a22e;
   color: #000000;
 }
 
 button.Slytherin:hover,
-.Slytherin-btn:hover {
+#Slytherin:active,
+.Slytherin-btn:hover,
+button.Slytherin-btn.Slytherin:active {
   background-color: #143720;
   color: #898989;
 }
 
 button.Ravenclaw:hover,
-.Ravenclaw-btn:hover {
+#Ravenclaw:active,
+.Ravenclaw-btn:hover,
+button.Ravenclaw-btn.Ravenclaw:active {
   background-color: #15255c;
   color: #946B2D;
 }
@@ -296,7 +311,11 @@ button.Ravenclaw:hover,
   background-color: #4d5c3c;
 }
 
-.card-btn {
+.student-card-btn {
+  margin-top: auto;
+}
+
+.exp-card-btns {
   margin-top: auto;
 }
 
