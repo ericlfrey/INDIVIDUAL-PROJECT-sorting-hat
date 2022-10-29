@@ -1,4 +1,5 @@
 import { students } from "../data/studentsArr.js";
+import { reasons } from "../data/reasons.js";
 import { welcomeCardDomStr } from "../components/welcomeCardDomStr.js";
 import { houseCrestModalStr } from "../components/houseCrestModalStr.js";
 import { pageDivOnDomStr } from "../components/pageDivOnDomStr.js";
@@ -133,14 +134,6 @@ const expelBtn = (e) => {
     const [, taco] = e.target.id.split('--');
     const studentIndex = students.findIndex(obj => obj.id === Number(taco));
     const expelledStudent = students[studentIndex];
-    // array for expulsion reasons
-    const reasons = [
-      'Failed O.W.L. exams',
-      'Sucking at Magic',
-      'Some Death Eater Shit',
-      'Being a total knob',
-      'Using Magic on Muggles'
-    ]
     expelledStudent.student = false;
     expelledStudent.reason = randomizer(reasons);
   }
@@ -238,6 +231,7 @@ const editStudent = (e) => {
       currentStudent.student = true;
     } else if (document.querySelector('#studentNo').checked) {
       currentStudent.student = false;
+      currentStudent.reason = randomizer(reasons);
     }
   }
   cardsOnDom(students);
